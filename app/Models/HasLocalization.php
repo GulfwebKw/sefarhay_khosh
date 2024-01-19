@@ -11,7 +11,7 @@ trait HasLocalization
         'fa' , 'en'
     ];
 
-    public function bootHasLocalization()
+    public  function initializeHasLocalization()
     {
         $translateAble = $this->getLocalizationAttribute();
         $newField = [];
@@ -23,10 +23,6 @@ trait HasLocalization
         $this->fillable = array_merge(
             $this->fillable ,
             $newField
-        );
-        $this->appends = array_merge(
-            $this->appends ,
-            $translateAble
         );
     }
 

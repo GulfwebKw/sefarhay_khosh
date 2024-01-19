@@ -13,7 +13,8 @@ use Illuminate\Support\Carbon;
  * @property string $title_fa
  * @property string $title
  * @property boolean $is_active
- * @property string $iso_code
+ * @property float $price
+ * @property string $background_image
  * @property Carbon $created_at
  * @property Carbon $updated_at
  */
