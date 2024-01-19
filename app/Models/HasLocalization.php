@@ -2,6 +2,8 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+
 /**
  * @property array  $hastTranslate
  */
@@ -24,6 +26,10 @@ trait HasLocalization
             $this->fillable ,
             $newField
         );
+        $this->appends = array_merge(
+            $this->appends ,
+            $translateAble
+        );
     }
 
     public function getLocalizationAttribute(): array
@@ -40,5 +46,14 @@ trait HasLocalization
             return parent::getAttributeValue($key);
         }
         return parent::getAttributeValue($key.'_'.app()->getLocale() );
+    }
+
+    public function __call($method, $parameters)
+    {
+        foreach ( $this->getLocalizationAttribute() as $item )
+            if ( $method == 'get'.Str::studly($item).'Attribute') {
+                return parent::getAttributeValue($item.'_'.app()->getLocale() );
+            }
+        return parent::__call($method, $parameters);
     }
 }

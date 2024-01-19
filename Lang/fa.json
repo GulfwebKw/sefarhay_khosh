@@ -1,5 +1,5 @@
 {
-    "home" : "خانه",
+    "Home" : "خانه",
     "about_us" : "درباره ما",
     "contact_us" : "تماس با ما",
     "other_lang_name" : "English",
@@ -8,5 +8,20 @@
     "copyright" : "حق چاپ",
     "by" : "توسط",
     "copyright2" : "، كليه حقوق محفوظ است.",
+    "country" : "کشور",
+    "about" : "درباره",
+    "sub_title" : "اخذ ویزای توریستی آنلاین",
+    "sub_title_black" : " ",
+    "full_name" : "نام و نام خانوادگی",
+    "email" : "ایمیل",
+    "telephone" : "شماره تلفن",
+    "passport" : "پاسپورت",
+    "face_id" : "عکس پرسنلی",
+    "national_scan" : "کارت ملی",
+    "national2_scan" : "شناسنامه",
+    "submit_and_pay" : "ثبت سفارش و پرداخت",
+    "step_get_visa" : "مراحل اخذ ویزای توریستی",
+    "time_get_visa" : "زمان پردازش ویزا",
+    "Dinar" : "د.ك",
     "" : ""
 }

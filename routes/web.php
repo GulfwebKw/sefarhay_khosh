@@ -13,4 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function (){});
+Route::get('/language/{lang}/change', function ($lang){
+    session()->put('locale', $lang);
+    return redirect()->back();
+})->name('changeLang');
+Route::get('/test', function (){
+
+});
+
+Route::get('/', \App\Livewire\Home::class)->name('home');

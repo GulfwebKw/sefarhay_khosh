@@ -32,7 +32,19 @@ class StatusResource extends Resource
                 Forms\Components\TextInput::make('title_fa')
                     ->required()
                     ->maxLength(255),
+                Forms\Components\TextInput::make('description_en')
+                    ->nullable()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('description_fa')
+                    ->nullable()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('icon')
+                    ->helperText('https://fontawesome.com/v6/icons?s=light')
+                    ->placeholder('fa-file-pen')
+                    ->required(),
                 Forms\Components\ColorPicker::make('color')
+                    ->required(),
+                Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);
     }
@@ -45,6 +57,8 @@ class StatusResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('title_fa')
                     ->searchable(),
+                Tables\Columns\ToggleColumn::make('is_active')
+                    ->searchable(),
             ])
             ->filters([
                 //
@@ -53,10 +67,9 @@ class StatusResource extends Resource
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ])->defaultSort('title_en', 'asc');
+            ])
+            ->defaultSort('ordering')
+            ->reorderable('ordering');
     }
 
     public static function getRelations(): array

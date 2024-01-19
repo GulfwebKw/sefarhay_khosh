@@ -26,40 +26,52 @@ class Settings extends Page implements HasForms
     protected static string $view = 'filament.pages.settings';
 
 
-    public $site_title ;
+    public $site_title_en ;
+    public $site_title_fa ;
+    public $email ;
+    public $telephone ;
+    public $work_time_fa ;
+    public $work_time_en ;
     public $logo ;
-    public $logo_dark ;
-    public $pdf_background ;
-    public $email_from ;
-    public $email_to ;
-    public $MYFATOORAH_API_KEY ;
+    public $twitter ;
+    public $facebook ;
+    public $instagram ;
+    public $sub_title_en ;
+    public $sub_title_fa ;
     public $MYFATOORAH_IS_LIVE ;
-    public $ageFrom ;
-    public $temp ;
-    public $ageFromDate ;
+    public $MYFATOORAH_API_KEY ;
 
     public $rules = [
-        'site_title' => ['required' , 'string'],
-        'MYFATOORAH_API_KEY' => ['required' , 'string'],
-        'email_from' => ['required' , 'email'],
-        'email_to' => ['required' , 'email'],
+        'site_title_en' => ['required' , 'string'],
+        'site_title_fa' => ['required' , 'string'],
+        'email' => ['required' , 'email'],
+        'telephone' => ['required' , 'string'],
+        'work_time_en' => ['required' , 'string'],
+        'work_time_fa' => ['required' , 'string'],
         'logo' => ['nullable' , 'image'],
-        'logo_dark' => ['nullable' , 'image'],
-        'pdf_background' => ['nullable' , 'image'],
+        'twitter' => ['nullable' , 'url'],
+        'facebook' => ['nullable' , 'url'],
+        'instagram' => ['nullable' , 'url'],
+        'sub_title_en' => ['nullable' , 'string'],
+        'sub_title_fa' => ['nullable' , 'string'],
         'MYFATOORAH_IS_LIVE' => ['nullable'],
-        'ageFrom' => ['nullable'],
-        'temp' => ['nullable'],
-        'ageFromDate' => ['nullable'],
+        'MYFATOORAH_API_KEY' => ['nullable' , 'string'],
     ];
     protected $validationAttributes = [
-        'site_title' => 'Site Title',
-        'MYFATOORAH_API_KEY' => 'Myfatoorah API Key',
-        'email_from' => 'Email From',
-        'email_to' => 'Notification Email address',
-        'logo' => 'Logo Light',
-        'logo_dark' => 'Logo Dark',
-        'pdf_background' => 'Logo Dark',
+        'site_title_en' => 'Site Title (En)',
+        'site_title_fa' => 'Site Title (Fa)',
+        'email' => 'Email',
+        'telephone' => 'Telephone',
+        'work_time_en' => 'Work time',
+        'work_time_fa' => 'Work time',
+        'logo' => 'Logo',
+        'twitter' => 'twitter',
+        'facebook' => 'facebook',
+        'instagram' => 'instagram',
+        'sub_title_en' => 'sub title (en)',
+        'sub_title_fa' => 'sub title (fa)',
         'MYFATOORAH_IS_LIVE' => 'Gateway mode',
+        'MYFATOORAH_API_KEY' => 'Myfatoorah API Key',
     ];
 
 
@@ -73,44 +85,46 @@ class Settings extends Page implements HasForms
         return [
             Section::make()
                 ->schema([
-                    TextInput::make('site_title')
-                        ->label('Site Title')
+                    TextInput::make('site_title_en')
+                        ->label('Site Title (En)')
                         ->required(),
-                    TextInput::make('email_from')
-                        ->label('Email From')
-                        ->rule(['email'])
+                    TextInput::make('site_title_fa')
+                        ->label('Site Title (Fa)')
                         ->required(),
-                    TextInput::make('email_to')
-                        ->label('Notification Email address')
-                        ->rule(['email'])
+                    TextInput::make('telephone')
                         ->required(),
+                    TextInput::make('email')
+                        ->type('email')
+                        ->required(),
+                    TextInput::make('work_time_en')
+                        ->required(),
+                    TextInput::make('work_time_fa')
+                        ->required(),
+                    TextInput::make('twitter')
+                        ->type('url')
+                        ->nullable(),
+                    TextInput::make('facebook')
+                        ->type('url')
+                        ->nullable(),
+                    TextInput::make('instagram')
+                        ->type('url')
+                        ->nullable(),
                     TextInput::make('logo')
-                        ->label('Logo Light')
+                        ->label('Logo')
                         ->type('file')
                         ->rule(['nullable' , 'image']),
-                    TextInput::make('logo_dark')
-                        ->label('Logo Dark')
-                        ->type('file')
-                        ->rule(['nullable' , 'image']),
-                    TextInput::make('pdf_background')
-                        ->label('PDF Background')
-                        ->type('file')
-                        ->rule(['nullable' , 'image']),
-                    Select::make('ageFrom')
-                        ->label('Calculate age from')
-                        ->required()
-                        ->options(['now' => 'Time of Filling form' , 'custom' => 'Special Date']),
-                    config::get('ageFrom', 'now') === "custom" ? DatePicker::make('ageFromDate')
-                        ->label('Calculate age from this date')
-                        ->required() : Hidden::make('temp'),
+                    TextInput::make('sub_title_en')
+                        ->nullable(),
+                    TextInput::make('sub_title_fa')
+                        ->nullable(),
                 ])
-                ->columns(3),
+                ->columns(2),
             Section::make()
                 ->label('Payment Gateway')
                 ->schema([
                     TextInput::make('MYFATOORAH_API_KEY')
                         ->label('Myfatoorah API Key')
-                        ->required(),
+                        ->nullable(),
                     Toggle::make('MYFATOORAH_IS_LIVE')
                         ->label('Gateway in live mode? (Danger! In Production do not stay in red position!)')
                         ->inline(false)
@@ -126,7 +140,6 @@ class Settings extends Page implements HasForms
     {
         $this->validate();
         $data = $this->form->getState() ;
-
         $carbon = now();
         if ( $data['logo'] instanceof TemporaryUploadedFile) {
             $logoPath = "public/". $carbon->year .'/'.$carbon->month.'/'.$carbon->day.'/'.'logo.' . $data['logo']->guessExtension();
@@ -135,21 +148,7 @@ class Settings extends Page implements HasForms
             config::force()->set(['logo' => $logoPath]);
             File::delete($last_logo_image);
         }
-        if ( $data['pdf_background'] instanceof TemporaryUploadedFile) {
-            $pdf_backgroundPath = "public/". $carbon->year .'/'.$carbon->month.'/'.$carbon->day.'/'.'pdf_background.' . $data['pdf_background']->guessExtension();
-            $data['pdf_background']->storeAs($pdf_backgroundPath);
-            $last_pdf_background_image = config::get('pdf_background');
-            config::force()->set(['pdf_background' => $pdf_backgroundPath]);
-            File::delete($last_pdf_background_image);
-        }
-        if ( $data['logo_dark'] instanceof TemporaryUploadedFile ) {
-            $logoPath = "public/". $carbon->year .'/'.$carbon->month.'/'.$carbon->day.'/'.'logo_dark.' . $data['logo_dark']->guessExtension();
-            $data['logo_dark']->storeAs($logoPath);
-            $last_logo_image = config::get('logo_dark');
-            config::force()->set(['logo_dark' => $logoPath]);
-            File::delete($last_logo_image);
-        }
-        config::force()->set(collect($data)->except(['logo' , 'logo_dark', 'pdf_background'])->toArray());
+        config::force()->set(collect($data)->except(['logo'])->toArray());
         Notification::make()
             ->title('Settings saved successfully!')
             ->success()

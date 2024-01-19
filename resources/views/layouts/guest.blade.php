@@ -36,7 +36,7 @@
                 </div>
                 @endif
                 <div class="menu_con">
-                    <a href="index.html" class="theme-btn btn-style-two">{{ __('Home') }}</a>
+                    <a href="{{ route('home') }}" class="theme-btn btn-style-two">{{ __('Home') }}</a>
                     <a href="aboutus.html" class="theme-btn btn-style-two">{{ __('about_us') }}</a>
                     <a href="contacts.html" class="theme-btn btn-style-two">{{ __('contact_us') }}</a>
 
@@ -74,10 +74,10 @@
                 </ul>
                 <ul class="contact-list-one">
 
-                    <li><span class="title txt_white"><a href="index.html">{{ __('Home') }}</a></span></li>
+                    <li><span class="title txt_white"><a href="{{ route('home') }}">{{ __('Home') }}</a></span></li>
                     <li><span class="title txt_white"><a href="aboutus.html">{{ __('about_us') }}</a></span></li>
                     <li><span class="title txt_white"><a href="contacts.html">{{ __('contact_us') }}</a></span></li>
-                    <li><span class="title txt_white"><a href="enindex.html">{{ __('other_lang_name') }}</a></span></li>
+                    <li><span class="title txt_white"><a href="{{ route('changeLang' , app()->getLocale() == "en" ? 'fa' : 'en') }}">{{ __('other_lang_name') }}</a></span></li>
 
                     <li>
                         <!-- Contact Info Box -->
@@ -100,7 +100,7 @@
                         <div class="contact-info-box">
                             <span class="icon lnr-icon-clock"></span>
                             <span class="title"></span>
-                            {{ \HackerESQ\Settings\Facades\Settings::get('work_time')   }}
+                            {{ \HackerESQ\Settings\Facades\Settings::get('work_time_'.app()->getLocale())   }}
                         </div>
                     </li>
                 </ul>

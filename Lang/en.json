@@ -1,5 +1,5 @@
 {
-    "home" : "Home",
+    "Home" : "Home",
     "about_us" : "About us",
     "contact_us" : "Contact us",
     "other_lang_name" : "فارسی",
@@ -8,5 +8,20 @@
     "copyright" : "Copyright",
     "by" : "by",
     "copyright2" : ", All Rights Reserved.",
+    "country" : "country",
+    "about" : "About",
+    "sub_title" : "Visa",
+    "sub_title_black" : "Consultation",
+    "full_name" : "Enter Name",
+    "email" : "Enter Email",
+    "telephone" : "Enter Phone",
+    "passport" : "Upload Passport Documents",
+    "face_id" : "Upload Travel Documents",
+    "national_scan" : "Upload Additional Documents",
+    "national2_scan" : "Upload Travel Documents",
+    "submit_and_pay" : "Submit & Pay Now",
+    "step_get_visa" : "",
+    "time_get_visa" : "",
+    "Dinar" : "DK",
     "" : ""
 }
