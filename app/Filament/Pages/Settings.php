@@ -33,6 +33,8 @@ class Settings extends Page implements HasForms
     public $telephone ;
     public $work_time_fa ;
     public $work_time_en ;
+    public $address_en ;
+    public $address_fa ;
     public $logo ;
     public $twitter ;
     public $facebook ;
@@ -44,42 +46,6 @@ class Settings extends Page implements HasForms
     public $MYFATOORAH_IS_LIVE ;
     public $MYFATOORAH_API_KEY ;
 
-    public $rules = [
-        'site_title_en' => ['required' , 'string'],
-        'site_title_fa' => ['required' , 'string'],
-        'email' => ['required' , 'email'],
-        'telephone' => ['required' , 'string'],
-        'work_time_en' => ['required' , 'string'],
-        'work_time_fa' => ['required' , 'string'],
-        'logo' => ['nullable' , 'image'],
-        'twitter' => ['nullable' , 'url'],
-        'facebook' => ['nullable' , 'url'],
-        'instagram' => ['nullable' , 'url'],
-        'sub_title_en' => ['nullable' , 'string'],
-        'sub_title_fa' => ['nullable' , 'string'],
-        'about_us_en' => ['nullable' , 'string'],
-        'about_us_fa' => ['nullable' , 'string'],
-        'MYFATOORAH_IS_LIVE' => ['nullable'],
-        'MYFATOORAH_API_KEY' => ['nullable' , 'string'],
-    ];
-    protected $validationAttributes = [
-        'site_title_en' => 'Site Title (En)',
-        'site_title_fa' => 'Site Title (Fa)',
-        'email' => 'Email',
-        'telephone' => 'Telephone',
-        'work_time_en' => 'Work time',
-        'work_time_fa' => 'Work time',
-        'logo' => 'Logo',
-        'twitter' => 'twitter',
-        'facebook' => 'facebook',
-        'instagram' => 'instagram',
-        'sub_title_en' => 'sub title (en)',
-        'sub_title_fa' => 'sub title (fa)',
-        'about_us_en' => 'About us (En)',
-        'about_us_fa' => 'About us (Fa)',
-        'MYFATOORAH_IS_LIVE' => 'Gateway mode',
-        'MYFATOORAH_API_KEY' => 'Myfatoorah API Key',
-    ];
 
 
     public function mount()
@@ -107,6 +73,10 @@ class Settings extends Page implements HasForms
                         ->required(),
                     TextInput::make('work_time_fa')
                         ->required(),
+                    TextInput::make('address_en')
+                        ->required(),
+                    TextInput::make('address_fa')
+                        ->required(),
                     TextInput::make('twitter')
                         ->type('url')
                         ->nullable(),
@@ -120,10 +90,6 @@ class Settings extends Page implements HasForms
                         ->label('Logo')
                         ->type('file')
                         ->rule(['nullable' , 'image']),
-                    TextInput::make('sub_title_en')
-                        ->nullable(),
-                    TextInput::make('sub_title_fa')
-                        ->nullable(),
                 ])
                 ->columns(2),
             Section::make()
@@ -132,6 +98,10 @@ class Settings extends Page implements HasForms
                     RichEditor::make('about_us_en')
                         ->nullable(),
                     RichEditor::make('about_us_fa')
+                        ->nullable(),
+                    TextInput::make('sub_title_en')
+                        ->nullable(),
+                    TextInput::make('sub_title_fa')
                         ->nullable(),
                 ])
                 ->columns(2),
@@ -154,7 +124,6 @@ class Settings extends Page implements HasForms
 
     public function save()
     {
-        $this->validate();
         $data = $this->form->getState() ;
         $carbon = now();
         if ( $data['logo'] instanceof TemporaryUploadedFile) {

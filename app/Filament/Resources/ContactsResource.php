@@ -77,4 +77,9 @@ class ContactsResource extends Resource
     {
         return false;
     }
+
+    public static function getNavigationBadge(): ?string
+    {
+        return static::$model::whereNull('read_at')->count();
+    }
 }

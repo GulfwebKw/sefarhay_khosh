@@ -38,7 +38,7 @@
                 <div class="menu_con">
                     <a href="{{ route('home') }}" class="theme-btn btn-style-two">{{ __('Home') }}</a>
                     <a href="{{ route('about-us') }}" class="theme-btn btn-style-two">{{ __('about_us') }}</a>
-                    <a href="contacts.html" class="theme-btn btn-style-two">{{ __('contact_us') }}</a>
+                    <a href="{{ route('contacts') }}" class="theme-btn btn-style-two">{{ __('contact_us') }}</a>
                     <a href="{{ route('changeLang' , app()->getLocale() == "en" ? 'fa' : 'en') }}" class="theme-btn btn-style-two">{{ __('other_lang_name') }}</a>
                 </div>
             </div>
@@ -76,7 +76,7 @@
 
                     <li><span class="title txt_white"><a href="{{ route('home') }}">{{ __('Home') }}</a></span></li>
                     <li><span class="title txt_white"><a href="{{ route('about-us') }}">{{ __('about_us') }}</a></span></li>
-                    <li><span class="title txt_white"><a href="contacts.html">{{ __('contact_us') }}</a></span></li>
+                    <li><span class="title txt_white"><a href="{{ route('contacts') }}">{{ __('contact_us') }}</a></span></li>
                     <li><span class="title txt_white"><a href="{{ route('changeLang' , app()->getLocale() == "en" ? 'fa' : 'en') }}">{{ __('other_lang_name') }}</a></span></li>
 
                     <li>
