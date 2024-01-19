@@ -22,3 +22,4 @@ Route::get('/test', function (){
 });
 
 Route::get('/', \App\Livewire\Home::class)->name('home');
+Route::view('/about-us', 'about-us')->name('about-us');

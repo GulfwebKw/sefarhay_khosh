@@ -4,6 +4,7 @@ namespace App\Filament\Pages;
 
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -38,6 +39,8 @@ class Settings extends Page implements HasForms
     public $instagram ;
     public $sub_title_en ;
     public $sub_title_fa ;
+    public $about_us_en ;
+    public $about_us_fa ;
     public $MYFATOORAH_IS_LIVE ;
     public $MYFATOORAH_API_KEY ;
 
@@ -54,6 +57,8 @@ class Settings extends Page implements HasForms
         'instagram' => ['nullable' , 'url'],
         'sub_title_en' => ['nullable' , 'string'],
         'sub_title_fa' => ['nullable' , 'string'],
+        'about_us_en' => ['nullable' , 'string'],
+        'about_us_fa' => ['nullable' , 'string'],
         'MYFATOORAH_IS_LIVE' => ['nullable'],
         'MYFATOORAH_API_KEY' => ['nullable' , 'string'],
     ];
@@ -70,6 +75,8 @@ class Settings extends Page implements HasForms
         'instagram' => 'instagram',
         'sub_title_en' => 'sub title (en)',
         'sub_title_fa' => 'sub title (fa)',
+        'about_us_en' => 'About us (En)',
+        'about_us_fa' => 'About us (Fa)',
         'MYFATOORAH_IS_LIVE' => 'Gateway mode',
         'MYFATOORAH_API_KEY' => 'Myfatoorah API Key',
     ];
@@ -116,6 +123,15 @@ class Settings extends Page implements HasForms
                     TextInput::make('sub_title_en')
                         ->nullable(),
                     TextInput::make('sub_title_fa')
+                        ->nullable(),
+                ])
+                ->columns(2),
+            Section::make()
+                ->label('Content')
+                ->schema([
+                    RichEditor::make('about_us_en')
+                        ->nullable(),
+                    RichEditor::make('about_us_fa')
                         ->nullable(),
                 ])
                 ->columns(2),
