@@ -56,7 +56,7 @@ class StatusResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])->defaultSort('title_en', 'asc');
     }
 
     public static function getRelations(): array
