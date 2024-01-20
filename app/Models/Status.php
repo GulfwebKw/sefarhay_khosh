@@ -36,6 +36,7 @@ class Status extends Model
     protected $fillable = [
         'color',
         'icon',
+        'is_active',
         'ordering',
     ];
 

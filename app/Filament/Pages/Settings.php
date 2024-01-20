@@ -2,6 +2,7 @@
 
 namespace App\Filament\Pages;
 
+use App\Models\Status;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\RichEditor;
@@ -43,6 +44,7 @@ class Settings extends Page implements HasForms
     public $sub_title_fa ;
     public $about_us_en ;
     public $about_us_fa ;
+    public $first_status ;
     public $MYFATOORAH_IS_LIVE ;
     public $MYFATOORAH_API_KEY ;
 
@@ -90,6 +92,10 @@ class Settings extends Page implements HasForms
                         ->label('Logo')
                         ->type('file')
                         ->rule(['nullable' , 'image']),
+                    Select::make('first_status')
+                        ->label('First status')
+                        ->options( Status::query()->where('is_active' , 1 )->get()->pluck('title_en' , 'id'))
+                        ->required(),
                 ])
                 ->columns(2),
             Section::make()

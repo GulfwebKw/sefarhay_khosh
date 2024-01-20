@@ -1,4 +1,10 @@
 <div>
+    <style>
+        /* webkit solution */
+        ::-webkit-input-placeholder { text-align:{{ app()->getLocale() == "fa" ? 'right' :'left' }}; }
+        /* mozilla solution */
+        input:-moz-placeholder { text-align: {{ app()->getLocale() == "fa" ? 'right' :'left' }}; }
+    </style>
     <!-- FAQ Section -->
     <section class="faqs-section pull-up" id="about">
         <div class="bg bg-pattern-9"></div>
@@ -23,65 +29,105 @@
 
                             <p>&nbsp;</p>
 
-                            <form  name="contact_form" class="" action="#" method="post">
+                            <div>
 
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input name="form_name" class="form-control" type="text" placeholder="{{ __('full_name') }}">
+                                            <input dir="auto" wire:model.lazy="form.name" class="form-control @error('form.name') is-invalid @enderror" type="text" placeholder="{{ __('full_name') }}">
+                                            @error('form.name')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input name="form_email" class="form-control required email" type="email" placeholder="{{ __('email') }}">
+                                            <input dir="auto" wire:model.lazy="form.email" class="form-control required email @error('form.email') is-invalid @enderror" type="email" placeholder="{{ __('email') }}">
+                                            @error('form.email')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input name="form_phone" class="form-control" type="text" placeholder="{{ __('telephone') }}">
+                                            <input dir="auto" wire:model.lazy="form.phone" class="form-control @error('form.phone') is-invalid @enderror" type="text" placeholder="{{ __('telephone') }}">
+                                            @error('form.phone')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <select class="form-control required">
+                                            <select dir="auto" wire:model.lazy="form.country_id" class="form-control required @error('form.country_id') is-invalid @enderror">
                                                 <option>{{ __('country') }}</option>
                                                 @foreach($countries as $country)
                                                     <option value="{{ $country['id'] }}">{{ $country['title'] }}</option>
                                                 @endforeach
                                             </select>
+                                            @error('form.country_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es" style="display: none;">
-                                            <label class="form-control line30x" for="customFileLang">{{ __('passport') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="passport" type="file" class="custom-file-input" id="passport" lang="es" style="display: none;">
+                                            <label class="form-control line30x @error('passport') is-invalid @enderror" for="passport">{{ __('passport') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
+                                            @error('passport')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es" style="display: none;">
-                                            <label class="form-control line30x" for="customFileLang">{{ __('face_id') }}	<i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="face" type="file" class="custom-file-input" id="face" lang="es" style="display: none;">
+                                            <label class="form-control line30x @error('face') is-invalid @enderror" for="face">{{ __('face_id') }}	<i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
+                                            @error('face')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es" style="display: none;">
-                                            <label class="form-control line30x" for="customFileLang">{{ __('national_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="national_id" type="file" class="custom-file-input" id="national_id" lang="es" style="display: none;">
+                                            <label class="form-control line30x @error('national_id') is-invalid @enderror" for="national_id">{{ __('national_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
+                                            @error('national_id')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input type="file" class="custom-file-input" id="customFileLang" lang="es" style="display: none;">
-                                            <label class="form-control line30x" for="customFileLang">{{ __('national2_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i></label>
+                                            <input wire:model.lazy="national_id2" type="file" class="custom-file-input" id="national_id2" lang="es" style="display: none;">
+                                            <label class="form-control line30x @error('national_id2') is-invalid @enderror" for="national_id2">{{ __('national2_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i></label>
+                                            @error('national_id2')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
                                         </div>
                                     </div>
                                 </div>
@@ -91,7 +137,7 @@
                                             <div class="mb-3">
                                                 <label for="P{{ $package['id'] }}" style="width: 100%;">
                                                 <div class="visa_bg">
-                                                    <input type="radio" id="P{{ $package['id'] }}" name="fav_language" value="{{ $package['id'] }}"> &nbsp;&nbsp;
+                                                    <input wire:model.lazy="form.package_id" type="radio" id="P{{ $package['id'] }}" name="fav_language" value="{{ $package['id'] }}"> &nbsp;&nbsp;
                                                     {{ $package['title'] }}
                                                     <h4 class="txt_white">{{ number_format($package['price']) }} {{__('Dinar')}}</h4>
                                                 </div>
@@ -100,17 +146,32 @@
                                         </div>
                                     @endforeach
                                 </div>
+                                @error('form.package_id')
+                                <div class="row">
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                </div>
+                                @enderror
 
                                 <div class="mb-3 text-center">
-                                    <input type="radio" id="html3" name="fav_language" value="">&nbsp;&nbsp;<img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard">
+                                    <input type="radio" id="html3" wire:model.lazy="form.gateway" value="creditcard">&nbsp;&nbsp;<img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard">
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" id="html3" name="fav_language" value="">&nbsp;&nbsp;<img src="{{ asset('images/icons/knet.png') }}" alt="knet">
+                                    <input type="radio" id="html3" wire:model.lazy="form.gateway" value="knet">&nbsp;&nbsp;<img src="{{ asset('images/icons/knet.png') }}" alt="knet">
                                 </div>
+                                @error('form.gateway')
+                                <div class="mb-3 text-center">
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                </div>
+                                @enderror
 
                                 <div class="mb-3 text-center">
-                                    <button type="submit" class="theme-btn btn-style-one" data-loading-text="Please wait..." style="margin-top: 20px;"><span class="btn-title">{{ __('submit_and_pay') }} </span></button>
+                                    <button type="submit"  wire:loading.attr="disabled"
+                                            wire:click.prevent="save" class="theme-btn btn-style-one" data-loading-text="Please wait..." style="margin-top: 20px;"><span class="btn-title">{{ __('submit_and_pay') }} </span></button>
                                 </div>
-                            </form>
+                            </div>
                         </div>
                     </div>
                 </div>

@@ -24,3 +24,6 @@ Route::get('/test', function (){
 Route::get('/', \App\Livewire\Home::class)->name('home');
 Route::view('/about-us', 'about-us')->name('about-us');
 Route::get('/contacts', \App\Livewire\Contacts::class)->name('contacts');
+
+Route::any('/application/{uuid}/gateway/callback', \App\Livewire\Contacts::class)->name('callBack');
+Route::any('/application/{uuid}', \App\Livewire\Contacts::class)->name('application.show');
