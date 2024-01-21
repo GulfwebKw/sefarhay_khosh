@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Package;
 use App\Models\Status;
 use HackerESQ\Settings\Facades\Settings;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Component;
 use Livewire\WithFileUploads;
@@ -94,7 +95,12 @@ class Home extends Component
         if ( $package->price <= 0 ){
            return PaymentController::applicationPaid($application, null , null , true);
         }
-        return PaymentController::pay($application);
+        try {
+            return PaymentController::pay($application);
+        } catch (\Exception $e) {
+            Log::info($e->getMessage());
+            $this->messageAlert='There was a problem connecting to the payment gateway! Please try again.';
+        }
     }
 
     public function render()

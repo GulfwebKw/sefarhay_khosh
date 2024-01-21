@@ -155,7 +155,7 @@
                                 @enderror
 
                                 <div class="mb-3 text-center">
-                                    <input type="radio" id="html3" wire:model.lazy="form.gateway" value="creditcard">&nbsp;&nbsp;<img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard">
+                                    <input type="radio" id="html3" wire:model.lazy="form.gateway" value="myfatourah">&nbsp;&nbsp;<img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard">
                                     &nbsp;&nbsp;&nbsp;&nbsp;
                                     <input type="radio" id="html3" wire:model.lazy="form.gateway" value="knet">&nbsp;&nbsp;<img src="{{ asset('images/icons/knet.png') }}" alt="knet">
                                 </div>
@@ -166,6 +166,14 @@
                                     </span>
                                 </div>
                                 @enderror
+
+                                @if($messageAlert)
+                                    <div class="mb-3">
+                                        <div class="alert alert-danger">
+                                            {{ $messageAlert }}
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="mb-3 text-center">
                                     <button type="submit"  wire:loading.attr="disabled"
