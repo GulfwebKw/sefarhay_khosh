@@ -86,10 +86,10 @@ class Home extends Component
         $application->uuid = $uuid;
         $application->status_id = Settings::get('first_status');
         $application->price = $package->price;
-        $application->passport = Str::replaceFirst($uuid.'/' , '' , $this->passport->store($uuid) );
-        $application->face = Str::replaceFirst($uuid.'/' , '' , $this->face->store($uuid) );
-        $application->national_id = Str::replaceFirst($uuid.'/' , '' , $this->national_id->store($uuid) );
-        $application->national_id2 = Str::replaceFirst($uuid.'/' , '' , $this->national_id2->store($uuid) );
+        $application->passport = $this->passport->storePublicly($uuid) ;
+        $application->face = $this->face->storePublicly($uuid) ;
+        $application->national_id = $this->national_id->storePublicly($uuid);
+        $application->national_id2 = $this->national_id2->storePublicly($uuid);
         $application->save();
         if ( $package->price <= 0 ){
            return PaymentController::applicationPaid($application, null , null , true);
