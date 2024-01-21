@@ -58,7 +58,7 @@ class Home extends Component
     public function mount(){
         $this->countries = Country::query()->where('is_active' , 1)->orderBy('title_en')->get()->toArray();
         $this->packages = Package::query()->where('is_active' , 1)->orderBy('price')->get()->toArray();
-        $this->statuses = Status::query()->orderBy('id')->get()->toArray();
+        $this->statuses = Status::query()->orderBy('ordering')->get()->toArray();
         $this->messageAlert = '';
         $this->passport = '';
         $this->face = '';
@@ -92,15 +92,7 @@ class Home extends Component
         $application->national_id = $this->national_id->storePublicly($uuid);
         $application->national_id2 = $this->national_id2->storePublicly($uuid);
         $application->save();
-        if ( $package->price <= 0 ){
-           return PaymentController::applicationPaid($application, null , null , true);
-        }
-        try {
-            return PaymentController::pay($application);
-        } catch (\Exception $e) {
-            Log::info($e->getMessage());
-            $this->messageAlert='There was a problem connecting to the payment gateway! Please try again.';
-        }
+        return redirect()->route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> $application->gateway]);
     }
 
     public function render()

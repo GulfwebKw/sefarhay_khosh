@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 
 use App\Jobs\sendRegisterEmailJob;
 use App\Models\Application;
+use App\Models\Status;
 use Barryvdh\DomPDF\Facade\Pdf;
 use HackerESQ\Settings\Facades\Settings;
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
 use MyFatoorah\Library\PaymentMyfatoorahApiV2;
 
 class Controller extends BaseController
@@ -23,13 +24,15 @@ class Controller extends BaseController
         return PaymentController::callBack($request , $application);
     }
 
-    public function application($uuid){
+    public function application(Request $request,$uuid){
         /** @var Application $application */
         $application = Application::query()->where('uuid' , $uuid)->firstOrFail();
-        return view('application' , compact('application' ));
+        $statuses = Status::query()->orderBy('ordering')->get()->toArray();
+        $msg = $request->get('msg');
+        return view('application' , compact('application' , 'statuses' , 'msg' ));
     }
 
-    public function applicationPay($uuid){
+    public function applicationPay($uuid , $gateway){
         /** @var Application $application */
         $application = Application::query()->where('paid' , 0)->where('uuid' , $uuid)->firstOrFail();
 
@@ -40,10 +43,12 @@ class Controller extends BaseController
             return PaymentController::applicationPaid($application, null , null , true);
         }
         try {
+            $application->gateway = $gateway;
+            $application->save();
             return PaymentController::pay($application);
         } catch (\Exception $e) {
             Log::info($e->getMessage());
-            return redirect()->route('application.show' , ['uuid' => $application->uuid , 'msg' => 'There was a problem connecting to the payment gateway! Please try again.' ]);
+            return redirect()->route('application.show' , ['uuid' => $application->uuid , 'msg' => trans('There was a problem connecting to the payment gateway! Please try again.') ]);
         }
     }
 }

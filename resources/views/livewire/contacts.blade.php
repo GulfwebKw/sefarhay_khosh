@@ -1,4 +1,10 @@
 <div>
+    <style>
+        /* webkit solution */
+        ::-webkit-input-placeholder { text-align:{{ app()->getLocale() == "fa" ? 'right' :'left' }}; }
+        /* mozilla solution */
+        input:-moz-placeholder { text-align: {{ app()->getLocale() == "fa" ? 'right' :'left' }}; }
+    </style>
     <!--Contact Details Start-->
     <section id="contact" class="contact-details" style="margin-top: 230px;">
         <div class="container ">

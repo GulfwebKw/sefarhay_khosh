@@ -3,6 +3,7 @@
     "(and :count more error)": "(و :count خطای دیگر)",
     "(and :count more errors)": "(و :count خطای دیگر)",
     "A Timeout Occurred": "مهلت زمانی تمام شد.",
+    "There was a problem connecting to the payment gateway! Please try again." : "در اتصال به بانک مشکلی پیش آمده است! لطفا مجدد تلاش کنید.",
     "about": "درباره",
     "about_us": "درباره ما",
     "Accept": "تایید کنید",

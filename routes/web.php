@@ -26,4 +26,5 @@ Route::view('/about-us', 'about-us')->name('about-us');
 Route::get('/contacts', \App\Livewire\Contacts::class)->name('contacts');
 
 Route::any('/application/{uuid}/gateway/callback', [\App\Http\Controllers\Controller::class , 'callback'])->name('callBack');
-Route::any('/application/{uuid}', \App\Livewire\Contacts::class)->name('application.show');
+Route::any('/application/{uuid}/gateway/{gateway}/pay', [\App\Http\Controllers\Controller::class , 'applicationPay'])->name('application.pay');
+Route::any('/application/{uuid}', [\App\Http\Controllers\Controller::class , 'application'])->name('application.show');
