@@ -47,6 +47,9 @@ class Settings extends Page implements HasForms
     public $first_status ;
     public $MYFATOORAH_IS_LIVE ;
     public $MYFATOORAH_API_KEY ;
+    public $KNET_IS_LIVE ;
+    public $KNET_TRANSPORTAL_ID ;
+    public $KNET_TRANSPORTAL_PASS ;
 
 
 
@@ -112,12 +115,28 @@ class Settings extends Page implements HasForms
                 ])
                 ->columns(2),
             Section::make()
-                ->label('Payment Gateway')
+                ->label('My Fatoorah Gateway')
                 ->schema([
                     TextInput::make('MYFATOORAH_API_KEY')
                         ->label('Myfatoorah API Key')
                         ->nullable(),
                     Toggle::make('MYFATOORAH_IS_LIVE')
+                        ->label('Gateway in live mode? (Danger! In Production do not stay in red position!)')
+                        ->inline(false)
+                        ->onColor('success')
+                        ->offColor('danger'),
+                ])
+                ->columns(2),
+            Section::make()
+                ->label('KNET Gateway')
+                ->schema([
+                    TextInput::make('KNET_TRANSPORTAL_ID')
+                        ->label('KNET Key')
+                        ->nullable(),
+                    TextInput::make('KNET_TRANSPORTAL_PASS')
+                        ->label('KNET Password')
+                        ->nullable(),
+                    Toggle::make('KNET_IS_LIVE')
                         ->label('Gateway in live mode? (Danger! In Production do not stay in red position!)')
                         ->inline(false)
                         ->onColor('success')
