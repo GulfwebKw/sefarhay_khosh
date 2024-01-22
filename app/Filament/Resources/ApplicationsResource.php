@@ -96,6 +96,8 @@ class ApplicationsResource extends Resource
                     ->toggleable(),
                 Tables\Columns\TextColumn::make('status.title_en')
                     ->toggleable(),
+                Tables\Columns\BooleanColumn::make('paid')
+                    ->toggleable(),
             ])
             ->filters([
                 Tables\Filters\TrashedFilter::make(),
