@@ -100,6 +100,48 @@ class PaymentController
         return array($status , $msg , null , $invoiceReference , $application);
     }
 
+
+    public static function knet(Application $application ,string $callback)
+    {
+        $PAYMENT_REQUEST_URL = Settings::get('KNET_IS_LIVE', true) ? 'https://www.kpay.com.kw' : 'https://www.kpaytest.com.kw'  ;
+        $PAYMENT_REQUEST_URL .= '/kpg/PaymentHTTP.htm?param=paymentInit&trandata=';
+        $key = config('app.key');
+        if (str_starts_with($key, 'base64:')) {
+            $key = base64_decode(substr($key, 7));
+        }
+        $TERM_RESOURCE_KEY = hash('sha256', $key);
+
+        $param = 'id=' . Settings::get('KNET_TRANSPORTAL_ID' , '') .
+            '&password=' . Settings::get('KNET_TRANSPORTAL_PASS' , '') .
+            '&action=1&langid=USA&currencycode=414&amt=' . $application->package->price .
+            '&responseURL=' . $callback .
+            '&errorURL=' . $callback .
+            '&trackid=' . $application->id .
+            '&udf1=' . $application->id .
+            '&udf2=&udf3=&udf4=&udf5=';
+
+        //echo $param; echo "<hr>";
+        $param = self::encryptAES($param, $TERM_RESOURCE_KEY) . '&tranportalId=' . Settings::get('KNET_TRANSPORTAL_ID' , '') . '&responseURL=' . $callback . '&errorURL=' . $callback;
+
+        $payredirectUrl = $PAYMENT_REQUEST_URL . $param;
+
+        $application->price = $application->package->price;
+        $application->gateway = 'knet';
+        $application->save();
+        return redirect()->to($payredirectUrl);
+
+    }
+
+    public static function knetCallback(Request $request,Application $application = null)
+    {
+        // failed transaction from KNET
+        return array(false , 'Failed check transaction!' , 'invoice id' , 'invoice reference' , $application);
+
+        // success transaction from KNET
+        return array(true , null , 'invoice id' , 'invoice reference' , $application);
+
+    }
+
     private static function findMethod($gateway)
     {
         switch ( $gateway ){
@@ -111,5 +153,34 @@ class PaymentController
                 break;
         }
         return $method;
+    }
+
+
+    private static function encryptAES($str, $key)
+    {
+        $str = self::pkcs5_pad($str);
+        $encrypted = openssl_encrypt($str, 'AES-128-CBC', $key, OPENSSL_ZERO_PADDING, $key);
+        $encrypted = base64_decode($encrypted);
+        $encrypted = unpack('C*', ($encrypted));
+        $encrypted = self::byteArray2Hex($encrypted);
+        $encrypted = urlencode($encrypted);
+
+        return $encrypted;
+    }
+
+    private static function pkcs5_pad($text)
+    {
+        $blocksize = 16;
+        $pad = $blocksize - (strlen($text) % $blocksize);
+
+        return $text . str_repeat(chr($pad), $pad);
+    }
+
+    private static function byteArray2Hex($byteArray)
+    {
+        $chars = array_map('chr', $byteArray);
+        $bin = implode($chars);
+
+        return bin2hex($bin);
     }
 }
