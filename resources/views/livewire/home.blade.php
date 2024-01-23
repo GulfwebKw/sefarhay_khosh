@@ -136,7 +136,7 @@
                                         <div class="col-sm-4">
                                             <div class="mb-3">
                                                 <label for="P{{ $package['id'] }}" style="width: 100%;">
-                                                <div class="visa_bg">
+                                                <div class="visa_bg" style="background: url({{ asset('/storage/'. $package['background_image']) }}) no-repeat !important;">
                                                     <input wire:model.lazy="form.package_id" type="radio" id="P{{ $package['id'] }}" name="fav_language" value="{{ $package['id'] }}"> &nbsp;&nbsp;
                                                     {{ $package['title'] }}
                                                     <h4 class="txt_white">{{ number_format($package['price']) }} {{__('Dinar')}}</h4>

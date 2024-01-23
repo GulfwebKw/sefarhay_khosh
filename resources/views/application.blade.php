@@ -87,7 +87,7 @@
                                     <div class="col-sm-4">
                                         <div class="mb-3">
                                             <label for="P{{ $application->package->id }}" style="width: 100%;">
-                                                <div class="visa_bg">
+                                                <div class="visa_bg" style="background: url({{ asset('/storage/'. $application->package->background_image ) }}) no-repeat !important;">
                                                     {{ $application->package['title_'.app()->getLocale()] }}
                                                     <h4 class="txt_white">{{ number_format($application->package->price) }} {{__('Dinar')}}</h4>
                                                 </div>
