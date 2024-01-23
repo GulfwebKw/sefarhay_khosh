@@ -42,8 +42,8 @@ class StatusResource extends Resource
                     ->helperText('https://fontawesome.com/v6/icons?s=light')
                     ->placeholder('fa-file-pen')
                     ->required(),
-                Forms\Components\ColorPicker::make('color')
-                    ->required(),
+//                Forms\Components\ColorPicker::make('color')
+//                    ->required(),
                 Forms\Components\Toggle::make('is_active')
                     ->required(),
             ]);
