@@ -8,6 +8,7 @@ use App\Models\Country;
 use App\Models\Package;
 use App\Models\Status;
 use HackerESQ\Settings\Facades\Settings;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Livewire\Component;
@@ -91,6 +92,7 @@ class Home extends Component
         $application->face = $this->face->storePublicly($uuid) ;
         $application->national_id = $this->national_id->storePublicly($uuid);
         $application->national_id2 = $this->national_id2->storePublicly($uuid);
+        File::moveDirectory(storage_path('app/'.$uuid) , storage_path('app/'.'public/'.$uuid ));
         $application->save();
         return redirect()->route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> $application->gateway]);
     }
