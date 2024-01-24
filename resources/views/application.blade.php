@@ -109,6 +109,29 @@
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'knet']) }}"><img src="{{ asset('images/icons/knet.png') }}" alt="knet"></a>
                                     </div>
+                                @else
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->gateway }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ number_format($application->price) }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->invoiceReference }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->invoiceId }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
                                 @endif
 
                             </div>
@@ -146,8 +169,8 @@
                         <div class="mt-40 note">
                             <h6>{{ __('time_get_visa') }}:</h6>
                             <ul>
-                                <li>پروسه صدور ویزا بصورت عادی 1 تا 3روز کاری زمان میبرد. ولی چنانچه برای بررسی بیشتر روند ممکن است ۷ تا ۱۰ روز کاری زمان می‌برد.</li>
-                                <li>مبنای محاسبه، یک روز پس از ارائه و ارسال مدارک است (بدون احتساب تعطیلات رسمی کشور و تعطیلات سفارت)</li>
+                                <li>{{ __('first_time_line') }}</li>
+                                <li>{{ __('second_time_line') }}</li>
                             </ul>
                         </div>
                     </div>

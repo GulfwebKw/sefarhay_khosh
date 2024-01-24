@@ -236,5 +236,7 @@
     "Web Server is Down": "Web Server is Down",
     "Whoops!": "Whoops!",
     "Yes": "Yes",
+    "first_time_line" : "The visa issuance process normally takes 1 to 3 working days. But it may take 7 to 10 working days for further review.",
+    "second_time_line" : "The basis of the calculation is one day after submitting and sending the documents (excluding national holidays and embassy holidays).",
     "You are receiving this email because we received a password reset request for your account.": "You are receiving this email because we received a password reset request for your account."
 }
