@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use HackerESQ\Settings\Facades\Settings;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\Request;
 use MyFatoorah\Library\PaymentMyfatoorahApiV2;
 
 class PaymentController
