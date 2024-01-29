@@ -42,7 +42,7 @@ class UpdateEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emailUpdate.blade',
+            view: 'emailUpdate',
             with: [
                 'application' => $this->application,
             ],

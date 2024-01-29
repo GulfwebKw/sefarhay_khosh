@@ -19,7 +19,9 @@ class EditApplications extends EditRecord
         ];
     }
 
-    public function beforeSave(){
+    public function mount(int | string $record): void
+    {
+        parent::mount($record);
         $this->lastStatus = $this->getRecord()->status_id;
     }
 
