@@ -18,10 +18,49 @@
                 <div class="faq-column col-lg-8 col-md-12 col-sm-12">
                     <div class="inner-column">
                         <div class="sec-title">
-                            <span class="sub-title">{{ __('about') }} {{ \HackerESQ\Settings\Facades\Settings::get('site_title_'.app()->getLocale(), 'Site title') }}</span>
-                            <h2><span class="color3">{{ __('sub_title') }}</span> {{ __('sub_title_black') }}</h2>
-                            <div class="text">{{ \HackerESQ\Settings\Facades\Settings::get('sub_title_'.app()->getLocale(), 'Site title') }}</div>
+{{--                            <span class="sub-title">{{ __('about') }} {{ \HackerESQ\Settings\Facades\Settings::get('site_title_'.app()->getLocale(), 'Site title') }}</span>--}}
+{{--                            <h2><span class="color3">{{ __('sub_title') }}</span> {{ __('sub_title_black') }}</h2>--}}
+{{--                            <div class="text">{{ \HackerESQ\Settings\Facades\Settings::get('sub_title_'.app()->getLocale(), 'Site title') }}</div>--}}
                             <div class="mt-3">
+
+
+                                @if( ! $application->paid)
+                                    @if($msg)
+                                        <div class="mb-3">
+                                            <div class="alert alert-danger">
+                                                {{ $msg }}
+                                            </div>
+                                        </div>
+                                    @endif
+                                    <div class="mb-3 text-center">
+                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'myfatourah']) }}"><img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard"></a>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'knet']) }}"><img src="{{ asset('images/icons/knet.png') }}" alt="knet"></a>
+                                    </div>
+                                @else
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->gateway }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ number_format($application->price) }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->invoiceReference }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="mb-3">
+                                                <input dir="auto" value="{{ $application->invoiceId }}" readonly class="form-control">
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endif
 
                                 <div class="row">
                                     <div class="col-sm-6">
@@ -95,45 +134,6 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                @if( ! $application->paid)
-                                    @if($msg)
-                                        <div class="mb-3">
-                                            <div class="alert alert-danger">
-                                                {{ $msg }}
-                                            </div>
-                                        </div>
-                                    @endif
-                                    <div class="mb-3 text-center">
-                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'myfatourah']) }}"><img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard"></a>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'knet']) }}"><img src="{{ asset('images/icons/knet.png') }}" alt="knet"></a>
-                                    </div>
-                                @else
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <input dir="auto" value="{{ $application->gateway }}" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <input dir="auto" value="{{ number_format($application->price) }}" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <input dir="auto" value="{{ $application->invoiceReference }}" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <div class="mb-3">
-                                                <input dir="auto" value="{{ $application->invoiceId }}" readonly class="form-control">
-                                            </div>
-                                        </div>
-                                    </div>
-                                @endif
-
                             </div>
                         </div>
                     </div>
