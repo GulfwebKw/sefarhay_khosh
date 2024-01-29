@@ -31,6 +31,7 @@ class Settings extends Page implements HasForms
     public $site_title_en ;
     public $site_title_fa ;
     public $email ;
+    public $emailNotification ;
     public $telephone ;
     public $work_time_fa ;
     public $work_time_en ;
@@ -71,7 +72,15 @@ class Settings extends Page implements HasForms
                         ->required(),
                     TextInput::make('telephone')
                         ->required(),
+                    Select::make('first_status')
+                        ->label('First status')
+                        ->options( Status::query()->where('is_active' , 1 )->get()->pluck('title_en' , 'id'))
+                        ->required(),
                     TextInput::make('email')
+                        ->type('email')
+                        ->required(),
+                    TextInput::make('emailNotification')
+                        ->label('Admin email for notification')
                         ->type('email')
                         ->required(),
                     TextInput::make('work_time_en')
@@ -95,10 +104,6 @@ class Settings extends Page implements HasForms
                         ->label('Logo')
                         ->type('file')
                         ->rule(['nullable' , 'image']),
-                    Select::make('first_status')
-                        ->label('First status')
-                        ->options( Status::query()->where('is_active' , 1 )->get()->pluck('title_en' , 'id'))
-                        ->required(),
                 ])
                 ->columns(2),
             Section::make()

@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\RegisterEmail;
+use App\Mail\UpdateEmail;
 use App\Models\Application;
 use Barryvdh\DomPDF\Facade\Pdf;
 use HackerESQ\Settings\Facades\Settings;
@@ -14,7 +15,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Mail;
 
-class sendRegisterEmailJob implements ShouldQueue
+class sendUpdateEmailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -32,15 +33,11 @@ class sendRegisterEmailJob implements ShouldQueue
      */
     public function handle(): void
     {
-        $to = Settings::get( 'emailNotification' ,false);
         /** @var Application $application */
         $application = Application::query()->findOrFail($this->aplication_id);
 
-        if (filter_var($to, FILTER_VALIDATE_EMAIL))
-            Mail::to($to)->send(new RegisterEmail($application));
-
         if (filter_var($application->email, FILTER_VALIDATE_EMAIL))
-            Mail::to($application->email)->send(new RegisterEmail($application));
+            Mail::to($application->email)->send(new UpdateEmail($application));
 
     }
 }

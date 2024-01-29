@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\sendRegisterEmailJob;
 use App\Models\Application;
 use HackerESQ\Settings\Facades\Settings;
 use Illuminate\Http\Request;
@@ -41,7 +42,7 @@ class PaymentController
         $application->paid = true;
         $application->paid_at = now();
         $application->save();
-//            dispatch(new sendRegisterEmailJob($application->id));
+        dispatch(new sendRegisterEmailJob($application->id));
         return redirect()->route('application.show' , ['uuid' => $application->uuid ]);
     }
 

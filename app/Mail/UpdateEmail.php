@@ -12,7 +12,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class RegisterEmail extends Mailable
+class UpdateEmail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -42,7 +42,7 @@ class RegisterEmail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'email',
+            view: 'emailUpdate.blade',
             with: [
                 'application' => $this->application,
             ],

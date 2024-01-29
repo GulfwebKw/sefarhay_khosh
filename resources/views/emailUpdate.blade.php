@@ -8,7 +8,7 @@
         <td style="width: 80%;border: none;vertical-align: middle;padding: 20px 20px;">
             Dear User,
             <div style="margin-top:10px;"></div>
-            New application form has been received. you can visit it from:<br>
+            Your application status has been updated to <strong>{{ $application->status->title_en }}</strong>. you can visit it from:<br>
             <a href="{{ route('application.show' , ['uuid' => $application->uuid])  }}">
                 {{ route('application.show' , ['uuid' => $application->uuid])  }}
             </a>
