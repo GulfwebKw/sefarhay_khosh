@@ -61,10 +61,10 @@ class Home extends Component
         $this->packages = Package::query()->where('is_active' , 1)->orderBy('price')->get()->toArray();
         $this->statuses = Status::query()->orderBy('ordering')->get()->toArray();
         $this->messageAlert = '';
-        $this->passport = '';
-        $this->face = '';
-        $this->national_id = '';
-        $this->national_id2 = '';
+        $this->passport = null;
+        $this->face = null;
+        $this->national_id = null;
+        $this->national_id2 = null;
         $this->form = [
             'name'=> '',
             'email'=> '',

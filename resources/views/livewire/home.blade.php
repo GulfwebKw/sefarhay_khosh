@@ -83,8 +83,8 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input wire:model.lazy="passport" type="file" class="custom-file-input" id="passport" lang="es" style="display: none;">
-                                            <label class="form-control line30x @error('passport') is-invalid @enderror" for="passport">{{ __('passport') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="passport" type="file" class="custom-file-input" id="passport" lang="es" onchange="$(this).parent().find('label').html( $(this)[0].files[0].name + ' <i class=\'fa-light fa-paperclip fa-lg attachment\'></i>');" style="display: none;">
+                                            <label class="form-control line30x @error('passport') is-invalid @enderror" for="passport">{{ optional($passport)->getClientOriginalName() ?? __('passport') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
                                             @error('passport')
                                             <span class="invalid-feedback" role="alert">
@@ -95,8 +95,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input wire:model.lazy="face" type="file" class="custom-file-input" id="face" lang="es" style="display: none;">
-                                            <label class="form-control line30x @error('face') is-invalid @enderror" for="face">{{ __('face_id') }}	<i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="face" type="file" class="custom-file-input" id="face" lang="es" onchange="$(this).parent().find('label').html( $(this)[0].files[0].name + ' <i class=\'fa-light fa-paperclip fa-lg attachment\'></i>');" style="display: none;">
+                                            <label class="form-control line30x @error('face') is-invalid @enderror" for="face">{{ optional($face)->getClientOriginalName() ?? __('face_id') }}	<i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
                                             @error('face')
                                             <span class="invalid-feedback" role="alert">
@@ -109,8 +109,8 @@
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input wire:model.lazy="national_id" type="file" class="custom-file-input" id="national_id" lang="es" style="display: none;">
-                                            <label class="form-control line30x @error('national_id') is-invalid @enderror" for="national_id">{{ __('national_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
+                                            <input wire:model.lazy="national_id" type="file" class="custom-file-input" id="national_id" lang="es" onchange="$(this).parent().find('label').html( $(this)[0].files[0].name + ' <i class=\'fa-light fa-paperclip fa-lg attachment\'></i>');" style="display: none;">
+                                            <label class="form-control line30x @error('national_id') is-invalid @enderror" for="national_id">{{ optional($national_id)->getClientOriginalName() ?? __('national_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i>
                                             </label>
                                             @error('national_id')
                                             <span class="invalid-feedback" role="alert">
@@ -121,8 +121,8 @@
                                     </div>
                                     <div class="col-sm-6">
                                         <div class="mb-3">
-                                            <input wire:model.lazy="national_id2" type="file" class="custom-file-input" id="national_id2" lang="es" style="display: none;">
-                                            <label class="form-control line30x @error('national_id2') is-invalid @enderror" for="national_id2">{{ __('national2_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i></label>
+                                            <input wire:model.lazy="national_id2" onchange="$(this).parent().find('label').html( $(this)[0].files[0].name + ' <i class=\'fa-light fa-paperclip fa-lg attachment\'></i>');" type="file" class="custom-file-input" id="national_id2" lang="es" style="display: none;">
+                                            <label class="form-control line30x @error('national_id2') is-invalid @enderror" for="national_id2">{{ optional($national_id2)->getClientOriginalName() ?? __('national2_scan') }} <i class="fa-light fa-paperclip fa-lg attachment"></i></label>
                                             @error('national_id2')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
