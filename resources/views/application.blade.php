@@ -31,6 +31,12 @@
                                                 {{ $msg }}
                                             </div>
                                         </div>
+                                    @else
+                                        <div class="mb-3">
+                                            <div class="alert alert-danger">
+                                                {{ __('invoice_failed_msg') }}
+                                            </div>
+                                        </div>
                                     @endif
                                     <div class="mb-3 text-center">
                                         <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'myfatourah']) }}"><img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard"></a>
@@ -38,6 +44,11 @@
                                         <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'knet']) }}"><img src="{{ asset('images/icons/knet.png') }}" alt="knet"></a>
                                     </div>
                                 @else
+                                    <div class="mb-3">
+                                        <div class="alert alert-success">
+                                            {{ __('invoice_paid_msg') }}
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-6">
                                             <div class="mb-3">
