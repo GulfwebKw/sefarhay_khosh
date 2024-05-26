@@ -39,7 +39,7 @@
                                         </div>
                                     @endif
                                     <div class="mb-3 text-center">
-                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'myfatourah']) }}"><img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard"></a>
+                                        <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'myfatourah']) }}"><img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard"> {{-- </a> --}}
                                         &nbsp;&nbsp;&nbsp;&nbsp;
                                         {{-- <a href="{{ route('application.pay' , [ 'uuid' => $application->uuid , 'gateway'=> 'knet']) }}"> --}}<img src="{{ asset('images/icons/knet.png') }}" alt="knet"></a>
                                     </div>
