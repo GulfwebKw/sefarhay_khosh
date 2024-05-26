@@ -71,7 +71,7 @@ class Home extends Component
             'phone'=> '',
             'country_id'=> '',
             'package_id'=> optional(optional($this->packages)[0])['id'],
-            'gateway'=> 'creditcard',
+            'gateway'=> 'myfatourah',
         ];
     }
 
