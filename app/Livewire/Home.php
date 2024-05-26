@@ -44,7 +44,7 @@ class Home extends Component
     ];
     public $rules = [
         'form.name'=> ['required' , 'string' ,'max:255'],
-        'form.email'=> ['required' , 'email' ,'max:255'],
+        'form.email'=> ['nullable' , 'email' ,'max:255'],
         'form.phone'=> ['required' , 'string' ,'max:255'],
         'form.country_id'=> ['required' , 'exists:countries,id'],
         'form.package_id'=> ['required' , 'exists:packages,id'],
