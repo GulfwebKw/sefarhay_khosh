@@ -157,7 +157,7 @@
                                 <div class="mb-3 text-center">
                                     <input type="radio" id="html3" wire:model.lazy="form.gateway" value="myfatourah">&nbsp;&nbsp;<img src="{{ asset('images/icons/creditcard.png') }}" alt="creditcard">
                                     &nbsp;&nbsp;&nbsp;&nbsp;
-                                    <input type="radio" id="html3" wire:model.lazy="form.gateway" value="knet">&nbsp;&nbsp;<img src="{{ asset('images/icons/knet.png') }}" alt="knet">
+                                    {{-- <input type="radio" id="html3" wire:model.lazy="form.gateway" value="knet">&nbsp;&nbsp; --}} <img src="{{ asset('images/icons/knet.png') }}" alt="knet">
                                 </div>
                                 @error('form.gateway')
                                 <div class="mb-3 text-center">
